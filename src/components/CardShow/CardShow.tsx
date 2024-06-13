@@ -1,49 +1,53 @@
-import { StarRounded } from "@mui/icons-material";
+import { StarRounded } from '@mui/icons-material'
 import {
-  Box,
-  Card,
-  CardActionArea,
-  CardActions,
-  CardContent,
-  Typography,
-} from "@mui/material";
+    Box,
+    Card,
+    CardActionArea,
+    CardActions,
+    CardContent,
+    Typography,
+} from '@mui/material'
 
-import { Show } from "@/types/Shows";
+import { Show } from '@/types/Shows'
 
-import { Cover, Description } from "./CardShow.styles";
+import { Cover, Description } from './CardShow.styles'
 
 function CardShow(show: Show) {
-  const { image, name, rating, summary } = show;
+    const { image, name, rating, summary } = show
 
-  return (
-    <Card elevation={5}>
-      <CardActionArea>
-        <Cover component="img" image={image?.original} />
+    return (
+        <Card elevation={5}>
+            <CardActionArea>
+                <Cover component="img" image={image?.original} />
 
-        <CardContent>
-          <Box display="flex" flexDirection="column" gap={2}>
-            <Typography fontSize="1.5rem" component="h3" fontWeight="bold">
-              {name}
-            </Typography>
+                <CardContent>
+                    <Box display="flex" flexDirection="column" gap={2}>
+                        <Typography
+                            fontSize="1.5rem"
+                            component="h3"
+                            fontWeight="bold"
+                        >
+                            {name}
+                        </Typography>
 
-            <Box height="100px">
-              <Description variant="body2">
-                {summary?.replace(/<[^>]*>?/gm, "")}
-              </Description>
-            </Box>
-          </Box>
-        </CardContent>
+                        <Box height="100px">
+                            <Description variant="body2">
+                                {summary?.replace(/<[^>]*>?/gm, '')}
+                            </Description>
+                        </Box>
+                    </Box>
+                </CardContent>
 
-        <CardActions>
-          <StarRounded />
+                <CardActions>
+                    <StarRounded />
 
-          <Typography variant="h6" component="p" fontWeight="bold">
-            {rating.average ?? "N/A"}
-          </Typography>
-        </CardActions>
-      </CardActionArea>
-    </Card>
-  );
+                    <Typography variant="h6" component="p" fontWeight="bold">
+                        {rating.average ?? 'N/A'}
+                    </Typography>
+                </CardActions>
+            </CardActionArea>
+        </Card>
+    )
 }
 
-export default CardShow;
+export default CardShow
