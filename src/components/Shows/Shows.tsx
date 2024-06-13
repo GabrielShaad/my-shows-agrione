@@ -1,6 +1,15 @@
 import { Grid } from "@mui/material";
 
-function Shows() {
+import CardShow from "../CardShow";
+import { ShowsResponse } from "@/types/Shows";
+import SkeletonCard from "../SkeletonCard";
+
+interface ShowsProps {
+  isLoading: boolean;
+  shows?: ShowsResponse[];
+}
+
+function Shows({ shows, isLoading }: ShowsProps) {
   return (
     <section>
       <Grid
@@ -10,35 +19,21 @@ function Shows() {
         alignItems="center"
         justifyContent="center"
       >
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <div
-            style={{ height: "200px", width: "100%", backgroundColor: "red" }}
-          ></div>
-        </Grid>
+        {isLoading && (
+          <>
+            {[1, 2, 3, 4, 5, 6].map((item) => (
+              <Grid item xs={12} sm={6} md={4} lg={3} key={item}>
+                <SkeletonCard />
+              </Grid>
+            ))}
+          </>
+        )}
 
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <div
-            style={{ height: "200px", width: "100%", backgroundColor: "red" }}
-          ></div>
-        </Grid>
-
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <div
-            style={{ height: "200px", width: "100%", backgroundColor: "red" }}
-          ></div>
-        </Grid>
-
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <div
-            style={{ height: "200px", width: "100%", backgroundColor: "red" }}
-          ></div>
-        </Grid>
-
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <div
-            style={{ height: "200px", width: "100%", backgroundColor: "red" }}
-          ></div>
-        </Grid>
+        {shows?.map((item, index) => (
+          <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+            <CardShow {...item.show} />
+          </Grid>
+        ))}
       </Grid>
     </section>
   );
