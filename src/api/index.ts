@@ -1,4 +1,5 @@
-import { ShowsResponse } from '@/types/Shows'
+import { Episode } from '@/types/Episodes'
+import { Show, ShowImage, ShowsResponse } from '@/types/Shows'
 import axios from 'axios'
 
 const api = axios.create({
@@ -10,4 +11,19 @@ const getShows = async (query: string) => {
     return response.data
 }
 
-export { getShows }
+const getShowDetails = async (id: string) => {
+    const response = await api.get<Show>(`shows/${id}`)
+    return response.data
+}
+
+const getShowImages = async (id: string) => {
+    const response = await api.get<ShowImage[]>(`shows/${id}/images`)
+    return response.data
+}
+
+const getEpisodes = async (id: string) => {
+    const response = await api.get<Episode[]>(`shows/${id}/episodes`)
+    return response.data
+}
+
+export { getShows, getShowDetails, getShowImages, getEpisodes }

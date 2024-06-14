@@ -1,5 +1,4 @@
-import { useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { StarRounded } from '@mui/icons-material'
 import {
     Box,
     Card,
@@ -8,31 +7,20 @@ import {
     CardContent,
     Typography,
 } from '@mui/material'
-import { StarRounded } from '@mui/icons-material'
 
-import { Show } from '@/types/Shows'
-import { ShowContext } from '@/context/ShowContext'
+import { Episode } from '@/types/Episodes'
 import useSanitizeText from '@/hooks/useSanitizeText'
 
-import { Cover, Description } from './CardShow.styles'
+import { Cover, Description } from './EpisodeCard.styles'
 
-function CardShow(show: Show) {
-    const { id, image, name, rating, summary } = show
-
-    const context = useContext(ShowContext)
+function EpisodeCard(episode: Episode) {
+    const { image, name, season, number, summary } = episode
 
     const [text] = useSanitizeText(summary)
 
-    const navigate = useNavigate()
-
     return (
         <Card elevation={5}>
-            <CardActionArea
-                onClick={() => {
-                    context?.setShow(show)
-                    navigate(`/show/${id}`)
-                }}
-            >
+            <CardActionArea>
                 <Cover component="img" image={image?.original} />
 
                 <CardContent>
@@ -55,7 +43,7 @@ function CardShow(show: Show) {
                     <StarRounded />
 
                     <Typography variant="h6" component="p" fontWeight="bold">
-                        {rating.average ?? 'N/A'}
+                        {`S${season} x E${number}`}
                     </Typography>
                 </CardActions>
             </CardActionArea>
@@ -63,4 +51,4 @@ function CardShow(show: Show) {
     )
 }
 
-export default CardShow
+export default EpisodeCard

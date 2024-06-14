@@ -1,13 +1,14 @@
 import Header from '@/components/Header'
-import { Wrapper } from './Page.styles'
-import { Container } from '@mui/material'
+import { Loading, Wrapper } from './Page.styles'
+import { CircularProgress, Container } from '@mui/material'
 import { ReactNode } from 'react'
 
 interface PageProps {
+    isLoading?: boolean
     children: ReactNode
 }
 
-function Page({ children }: PageProps) {
+function Page({ isLoading, children }: PageProps) {
     return (
         <Wrapper>
             <Header />
@@ -23,7 +24,13 @@ function Page({ children }: PageProps) {
                     gap: '1rem',
                 }}
             >
-                {children}
+                {isLoading ? (
+                    <Loading>
+                        <CircularProgress color="inherit" />
+                    </Loading>
+                ) : (
+                    children
+                )}
             </Container>
         </Wrapper>
     )
